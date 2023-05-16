@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "nodenext",
+    "outDir": "build",
+    "strictNullChecks": true,
+    "target": "esnext"
+  },
+  "include": ["./**/*"],
+  "exclude": ["node_modules/*"]
+}
