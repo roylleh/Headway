@@ -13,7 +13,7 @@ const InsuranceBody = Type.Object({
   id: Type.Optional(Type.String({ format: "uuid" })),
   name: Type.String(),
 });
-type InsuranceBodyType = Static<typeof InsuranceBody>;
+type InsuranceBody = Static<typeof InsuranceBody>;
 
 export const buildInsuranceRoutes = async (
   fastify: FastifyInstance,
@@ -42,7 +42,7 @@ export const buildInsuranceRoutes = async (
     }
   );
 
-  fastify.post<{ Body: InsuranceBodyType; Reply: InsuranceBodyType }>(
+  fastify.post<{ Body: InsuranceBody; Reply: InsuranceBody }>(
     "/insurance",
     {
       schema: {

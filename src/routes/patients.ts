@@ -18,12 +18,12 @@ const PatientBody = Type.Object({
   dob: Type.String({ format: "date" }),
   insurance: Type.String(),
 });
-type PatientBodyType = Static<typeof PatientBody>;
+type PatientBody = Static<typeof PatientBody>;
 
 const PatientQuery = Type.Object({
   id: Type.String({ format: "uuid" }),
 });
-type PatientQueryType = Static<typeof PatientQuery>;
+type PatientQuery = Static<typeof PatientQuery>;
 
 export const buildPatientsRoutes = async (
   fastify: FastifyInstance,
@@ -52,7 +52,7 @@ export const buildPatientsRoutes = async (
     }
   );
 
-  fastify.post<{ Body: PatientBodyType; Reply: PatientBodyType }>(
+  fastify.post<{ Body: PatientBody; Reply: PatientBody }>(
     "/patients",
     {
       schema: {
@@ -78,9 +78,9 @@ export const buildPatientsRoutes = async (
   );
 
   fastify.put<{
-    Querystring: PatientQueryType;
-    Body: PatientBodyType;
-    Reply: PatientBodyType;
+    Querystring: PatientQuery;
+    Body: PatientBody;
+    Reply: PatientBody;
   }>(
     "/patients",
     {
@@ -96,18 +96,18 @@ export const buildPatientsRoutes = async (
       const patient = req.body;
       patient.id = req.query.id;
 
-      const command = await ddbDocClient.send(
+      const get = await ddbDocClient.send(
         new GetCommand({
           TableName: TABLE_PATIENTS,
           Key: { id: patient.id },
         })
       );
 
-      if (!command.Item) {
+      if (!get.Item) {
         return res.status(404).send();
       }
 
-      ddbDocClient.send(
+      await ddbDocClient.send(
         new PutCommand({
           TableName: TABLE_PATIENTS,
           Item: patient,
