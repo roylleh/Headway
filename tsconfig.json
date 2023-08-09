@@ -6,6 +6,6 @@
     "strictNullChecks": true,
     "target": "esnext"
   },
-  "include": ["./**/*"],
+  "include": ["src"],
   "exclude": ["node_modules/*"]
 }
