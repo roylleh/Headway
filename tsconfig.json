@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "module": "esnext",
-    "moduleResolution": "nodenext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "outDir": "build",
     "strictNullChecks": true,
-    "target": "esnext"
+    "target": "ESNext"
   },
-  "include": ["src"],
-  "exclude": ["node_modules/*"]
+  "include": [".eslintrc.js", "jest.config.js", "src", "tst"],
+  "exclude": ["build, node_modules"]
 }
